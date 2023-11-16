@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi8
+FROM registry.access.redhat.com/ubi9
 LABEL Description="Builder for JWS operator"
 VOLUME /tmp
 
@@ -6,16 +6,15 @@ USER root
 
 RUN yum install buildah maven git -y
 # for redhat_jws_download.py: python3-requests python3-lxml unzip gcc-c++ pip3 python3-dev -y 
-# RUN yum install python3-requests python3-lxml unzip gcc-c++ python3-pip python3-devel -y 
 # RUN pip3 install ujson
 
 #RUN rm -rf /var/lib/containers
 
 # For openshift (a bit hacky)
-RUN echo "1000:100000:65536" > /etc/subuid
-RUN echo "1000:100000:65536" > /etc/subgid
-RUN chmod a+w /etc/subuid
-RUN chmod a+w /etc/subgid
+#RUN echo "1000:100000:65536" > /etc/subuid
+#RUN echo "1000:100000:65536" > /etc/subgid
+#RUN chmod a+w /etc/subuid
+#RUN chmod a+w /etc/subgid
 
 ADD build.sh /usr/bin/build.sh
 # ADD redhat_jws_download.py /usr/bin/redhat_jws_download.py
